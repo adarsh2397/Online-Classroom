@@ -16,7 +16,7 @@ export class LoginService {
     private http: Http,
     private utilityService: UtilityService
   ) { }
-
+  
   registerUser(data) {
     const specificUrl = this.serverUrl + 'register-user';
 

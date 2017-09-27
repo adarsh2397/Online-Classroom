@@ -15,6 +15,9 @@ import { HomeComponent } from './body/home/home.component';
 import { LoginComponent } from './body/home/login/login.component';
 import { RegisterComponent } from './body/home/register/register.component';
 
+import { LoginService } from './services/login.service';
+import { UtilityService } from './services/utility.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +36,10 @@ import { RegisterComponent } from './body/home/register/register.component';
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    UtilityService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,77 @@
-<p>
-  register works!
-</p>
+<br>
+<form #registerForm="ngForm" class="register">
+    <table cellspacing="2" align="right">
+        <tr>
+            <td colspan="3">
+                <md-form-field>
+                    <input name="firstname" mdInput placeholder="First Name" [(ngModel)]="firstname">
+                </md-form-field>
+            </td>
+            <td colspan="3">
+                <md-form-field>
+                    <input name="lastname" mdInput placeholder="Last Name" [(ngModel)]="lastname">
+                </md-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <md-form-field>
+                    <input name="username" mdInput placeholder="Username" required [(ngModel)]="username">
+                </md-form-field>
+            </td>
+            <td colspan="3">
+                <md-form-field>
+                    <input name="passsword" mdInput placeholder="Password" minlength="6" required type="password" [(ngModel)]="password">
+                </md-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <md-form-field>
+                    <input name="email" mdInput placeholder="Email" [(ngModel)]="email" required>
+                </md-form-field>
+            </td>
+            <td colspan="3">
+                <md-form-field>
+                    <input name="phone" mdInput placeholder="Phone Number" [(ngModel)]="phone" required>
+                </md-form-field>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <md-form-field style="width:100%;">
+                    <input name="city" mdInput placeholder="City" [(ngModel)]="city" required>
+                </md-form-field>
+            </td>
+            <td colspan="2">
+                <md-form-field style="width:100%;">
+                    <input name="pincode" mdInput placeholder="Pincode" [(ngModel)]="pincode" required>
+                </md-form-field>
+            </td>
+            <td colspan="2">
+                <md-form-field style="width:100%;">
+                    <input name="house" mdInput placeholder="House" [(ngModel)]="house" required>
+                </md-form-field>
+            </td>
+        </tr>
+
+    </table>
+
+    <br><br>
+    <br>
+    <div class="row" style="text-align:center;">
+        <md-radio-group name="type" [(ngModel)]="type" required>
+            <span style="color: #646363">
+                <md-radio-button value="Student" selected>Student</md-radio-button>&nbsp;&nbsp;&nbsp;
+                <md-radio-button value="Teacher">Instructor</md-radio-button>
+                </span>
+        </md-radio-group>
+    </div>
+    <br><br>
+    <div class="row" style="text-align:center;">
+        <button md-raised-button class="btn-primary" (click)="submitForm()" [disabled]="!registerForm.valid">Register</button>
+    </div>
+</form>

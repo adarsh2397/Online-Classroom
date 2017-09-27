@@ -4,7 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 import { BodyComponent } from '../body/body.component';
 import { HomeComponent } from '../body/home/home.component';
 
-const routes:Routes = [ ]
+const routes:Routes = [
+    {
+        path: '',
+        component: BodyComponent,
+        children: [
+            {
+                path: 'home',
+                component: HomeComponent,
+            },
+            {
+                path: '',
+                redirectTo: 'home',
+                pathMatch: 'full'
+            }
+        ]
+    },
+]
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
@@ -12,16 +28,4 @@ const routes:Routes = [ ]
 })
 
 export class AppRoutingModule {
-    routes = [
-        {
-            path: '',
-            component: BodyComponent,
-            children: [
-                {
-                    path: 'home',
-                    component: HomeComponent
-                }
-            ]
-        },
-    ]
 }
