@@ -28,4 +28,15 @@ export class LoginService {
           .catch(this.utilityService.handleError);
   }
 
+  loginUser(data) {
+    const specificUrl = this.serverUrl + 'login-user';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
 }

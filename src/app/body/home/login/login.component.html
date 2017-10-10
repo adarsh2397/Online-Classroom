@@ -1,21 +1,10 @@
 <br>
-<form class="login">
-
-    <md-form-field>
-        <input mdInput placeholder="Username">
-    </md-form-field>
-    <br>
-    <md-form-field>
-        <input mdInput placeholder="Password">
-    </md-form-field>
-    <br><br>
-    <md-radio-group>
-        <span style="color: #646363">I am a:  <br><br>
-                <md-radio-button value="1">Student</md-radio-button> <br>  
-                <md-radio-button value="2">Instructor</md-radio-button>
-                </span>
-    </md-radio-group>
-    <br><br>
-    <button md-raised-button>Login</button>
-
-</form>
+<md-form-field>
+    <input mdInput name="username" [(ngModel)]="username" placeholder="Username">
+</md-form-field>
+<br>
+<md-form-field>
+    <input mdInput type="password" name="password" [(ngModel)]="password" placeholder="Password">
+</md-form-field>
+<br><br>
+<button md-raised-button (click)="loginUser();">Login</button>
