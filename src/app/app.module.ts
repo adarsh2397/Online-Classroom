@@ -18,6 +18,7 @@ import { DashboardComponent } from './body/dashboard/dashboard.component';
 
 import { LoginService } from './services/login.service';
 import { UtilityService } from './services/utility.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { UtilityService } from './services/utility.service';
   ],
   providers: [
     LoginService,
-    UtilityService
+    UtilityService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })
