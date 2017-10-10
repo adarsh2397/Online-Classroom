@@ -14,6 +14,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './body/home/home.component';
 import { LoginComponent } from './body/home/login/login.component';
 import { RegisterComponent } from './body/home/register/register.component';
+import { DashboardComponent } from './body/dashboard/dashboard.component';
 
 import { LoginService } from './services/login.service';
 import { UtilityService } from './services/utility.service';
@@ -26,7 +27,8 @@ import { UtilityService } from './services/utility.service';
     FooterComponent,
     HomeComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,55 @@
+@font-face {
+  font-family: roboto-thin;
+  src: url(/assets/roboto/Roboto-Thin.ttf);
+}
+
+@font-face {
+  font-family: roboto-light;
+  src: url(/assets/roboto/Roboto-Light.ttf);
+}
+
+@font-face {
+  font-family: roboto-black-italic;
+  src: url(/assets/roboto/Roboto-BlackItalic.ttf);
+}
+
+
+.background{
+      height: 90vh;
+      background-image: url("/assets/login-background.jpg");
+}
+
+.tint{
+    height: 90vh;
+    background: rgb(0, 0, 0, 0.3);
+}
+
+.profilePicture{
+    padding-left: 60px !important;
+    padding-top: 95px;
+    padding-bottom: 15px;
+}
+
+.base{
+    background-color: white;
+    width: 98%;
+    position: fixed;    
+    margin-left: 1%;
+    margin-top: 1%;
+    box-shadow: 9px 1px 7px 1px black;
+    border-radius: 2px;
+}
+
+.fields{
+    font-family: roboto-light;
+    font-size: 20px;
+}
+
+td{
+    padding: 15px;
+
+}
+
+table{
+    border-left: 1px solid gray;
+}

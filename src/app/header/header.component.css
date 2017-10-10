@@ -17,3 +17,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3e2c7', end
 
 
 }
+
+.welcomeName{
+    font-family: roboto;
+    text-align: center;
+    font-size: 25px;
+    position: absolute;
+    padding-top: 13px;
+    /* height: 100%; */
+}
