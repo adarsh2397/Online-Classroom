@@ -14,11 +14,12 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './body/home/home.component';
 import { LoginComponent } from './body/home/login/login.component';
 import { RegisterComponent } from './body/home/register/register.component';
-import { DashboardComponent, EditProfileComponent } from './body/dashboard/dashboard.component';
+import { DashboardComponent } from './body/dashboard/dashboard.component';
 
 import { LoginService } from './services/login.service';
 import { UtilityService } from './services/utility.service';
 import { UserService } from './services/user.service';
+import { EditProfileDialogComponent } from './body/dashboard/edit-profile-dialog/edit-profile-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { UserService } from './services/user.service';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    EditProfileComponent
+    EditProfileDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +48,7 @@ import { UserService } from './services/user.service';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    EditProfileComponent
+    EditProfileDialogComponent
   ]
 })
 export class AppModule { }

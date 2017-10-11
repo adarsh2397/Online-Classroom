@@ -1,5 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
+
+import { MdDialog } from '@angular/material';
+import { EditProfileDialogComponent } from './edit-profile-dialog/edit-profile-dialog.component';
 
 import { UserService } from '../../services/user.service';
 
@@ -14,48 +17,52 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    public dialog: MatDialog
-  ) { this.openDialog(); }
-    openDialog(): void {
-      let dialogRef = this.dialog.open(EditProfileComponent, {
-        width: '300px'
-      });
-
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-      });
+    private dialog: MdDialog,
+    private router: Router
+  ) { 
+    if (!this.userService.loggedIn) {
+      this.router.navigate(['home']);
     }
+  }
   
 
   ngOnInit() {
-    this.userService.userLoaded.subscribe((details) => {
-      this.userDetails = details;
+    this.getUserDetails();
+  }
+
+  getUserDetails() {
+    if (this.userService){
+      this.userService.userLoaded.subscribe((details) => {
+        this.userDetails = details;
+        if (this.userService.profileUpdated == false) {
+          this.checkUserDetails();
+        }
+      });
+    }
+  }
+
+  checkUserDetails() {
+    if (this.userDetails) {
+      this.openEditProfile();
+    }
+  }
+
+  openEditProfile() {
+    console.log('Hey');
+    console.log( this.userDetails);
+    let dialog = this.dialog.open(EditProfileDialogComponent, {
+      data: this.userDetails
+    });
+
+    dialog.afterClosed().subscribe((status) => {
+      if (status == 'Updated') {
+        const data = {
+          id: this.userService.getUserID(),
+          type: this.userService.getUserType()
+        }
+        this.userService.getUserDetails(data);
+      }
     });
   }
-
-}
-
-
-@Component({
-  selector: 'edit-profile',
-  templateUrl: './edit-profile.html',
-})
-export class EditProfileComponent {
-
-  constructor(
-    public dialogRef: MatDialogRef<EditProfileComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  degrees = [
-    { name: 'B.Tech'},
-    { name: 'M.Tech'},
-    { name: 'Ph.D'},
-    { name: 'MCA'}
-    
-  ];
 
 }

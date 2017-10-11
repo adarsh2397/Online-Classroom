@@ -14,8 +14,10 @@ export class UserService {
 
   private userID: number;
   private userType: string;
+  public profileUpdated: boolean;
+  public loggedIn = false;
 
-  public userDetails: string;
+  public userDetails: any;
 
   public userLoaded = new BehaviorSubject<any>(null);
 
@@ -38,6 +40,7 @@ export class UserService {
 
   setUserID(id: number) {
     this.userID = id;
+    this.loggedIn = true;
   }
 
   setUserDetails(id: number, type: string) {
@@ -45,21 +48,39 @@ export class UserService {
       id: id,
       type: type
     }
-    this.getUserDetails(data)
-      .subscribe((response) => {
+    this.getUserDetails(data);
+  }
+
+  getUserDetails(data) {
+    const specificUrl = this.serverUrl + 'user/get-user-details';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    let responseData =  this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError)
+          .subscribe((response) => {
         if (response['_body'] == 'Failure') {
           alert('Unable to Get User Details');
         } else {
           console.log(response);
           this.userDetails = JSON.parse(response['_body'])[0];
           console.log(this.userDetails);
+          if (this.userDetails.hasOwnProperty('gender')) {
+            this.profileUpdated = true;
+          } else {
+            this.profileUpdated = false;
+          }
           this.userLoaded.next(this.userDetails);
         }
       });
+    
+    return responseData;
   }
 
-  getUserDetails(data) {
-    const specificUrl = this.serverUrl + 'user/get-user-details';
+  saveProfile(data) {
+    const specificUrl = this.serverUrl + 'user/update-user-details';
 
     const headers = new Headers({'Content-Type' : 'application/json'});
     const options = new RequestOptions({headers: headers});

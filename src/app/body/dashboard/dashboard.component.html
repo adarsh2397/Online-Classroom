@@ -1,14 +1,77 @@
 <div class="background">
     <div class="tint">
         <div class="base">
-            <h2 style="text-align: center;font-family: roboto-light;">Profile <span (click) = "openDialog()" style = "cursor: pointer;">&#x2710;</span></h2><br><br>
+            <h2 style="text-align: center;font-family: roboto-light;">Profile <span (click)="openEditProfile()" style="cursor: pointer;">&#x2710;</span></h2><br><br>
             <div class="row" *ngIf="userDetails">
                 <div class="col-sm-3">
 
                     <img src="/assets/bigcircle.png" class="profilePicture">
                 </div>
 
-                <div class="col-sm-9">
+                <div class="col-sm-9" *ngIf="userDetails.type == 'Student'">
+                    <table>
+                        <tr>
+                            <td><span class="fields">First Name:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.firstname}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="fields">Second Name:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.lastname}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="fields">Username:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.username}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="fields">E-mail:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.email}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="fields">Phone:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.phone_no}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="fields">House:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.house}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="fields">Pincode:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.pincode}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <td><span class="fields">City:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.city}} </span></td>
+                        </tr>
+
+                        <tr *ngIf="userService.profileUpdated">
+                            <td><span class="fields">Roll No:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.roll_no}} </span></td>
+                        </tr>
+
+                        <tr *ngIf="userService.profileUpdated">
+                            <td><span class="fields">Reg No:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.reg_no}} </span></td>
+                        </tr>
+
+                        <tr *ngIf="userService.profileUpdated">
+                            <td><span class="fields">Degree:</span></td>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.degree}} </span></td>
+                        </tr>
+
+                    </table>
+                    <br>
+
+                </div>
+
+
+                <div class="col-sm-9" *ngIf="userDetails.type == 'Teacher'">
                     <table>
                         <tr>
                             <td><span class="fields">First Name:</span></td>
@@ -51,87 +114,24 @@
                         </tr>
 
                         <tr>
-                          <td><span class="fields">Roll No:</span></td>
-                          <td><span class="fields" contenteditable="true"> ROLL NO </span></td>
+                            <td><span class="fields">Gender:</span></td>
+                            <td><span class="fields" contenteditable="true"> GENDER </span></td>
                         </tr>
 
                         <tr>
-                          <td><span class="fields">Reg No:</span></td>
-                          <td><span class="fields" contenteditable="true"> REG NO </span></td>
+                            <td><span class="fields">Designation:</span></td>
+                            <td><span class="fields" contenteditable="true"> DESG </span></td>
                         </tr>
 
                         <tr>
-                          <td><span class="fields">Degree:</span></td>
-                          <td><span class="fields" contenteditable="true"> DEGREE </span></td>
+                            <td><span class="fields">About:</span></td>
+                            <td><span class="fields" contenteditable="true"> ABOUT </span></td>
                         </tr>
 
                     </table>
                     <br>
 
                 </div>
-
-
-                <!-- <div class="col-sm-9">
-                  <table>
-                    <tr>
-                      <td><span class="fields">First Name:</span></td>
-                      <td><span class="fields" contenteditable="true"> {{userDetails.firstname}} </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">Second Name:</span></td>
-                      <td><span class="fields" contenteditable="true"> {{userDetails.lastname}} </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">Username:</span></td>
-                      <td><span class="fields" contenteditable="true"> {{userDetails.username}} </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">E-mail:</span></td>
-                      <td><span class="fields" contenteditable="true"> {{userDetails.email}} </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">Phone:</span></td>
-                      <td><span class="fields" contenteditable="true"> {{userDetails.phone_no}} </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">House:</span></td>
-                      <td><span class="fields" contenteditable="true"> {{userDetails.house}} </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">Pincode:</span></td>
-                      <td><span class="fields" contenteditable="true"> {{userDetails.pincode}} </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">City:</span></td>
-                      <td><span class="fields" contenteditable="true"> {{userDetails.city}} </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">Gender:</span></td>
-                      <td><span class="fields" contenteditable="true"> GENDER </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">Designation:</span></td>
-                      <td><span class="fields" contenteditable="true"> DESG </span></td>
-                    </tr>
-
-                    <tr>
-                      <td><span class="fields">About:</span></td>
-                      <td><span class="fields" contenteditable="true"> ABOUT </span></td>
-                    </tr>
-
-                  </table>
-                  <br>
-
-                </div> -->
 
             </div>
         </div>
