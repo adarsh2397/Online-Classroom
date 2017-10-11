@@ -50,4 +50,12 @@ export class EditProfileComponent {
     this.dialogRef.close();
   }
 
+  degrees = [
+    { name: 'B.Tech'},
+    { name: 'M.Tech'},
+    { name: 'Ph.D'},
+    { name: 'MCA'}
+    
+  ];
+
 }
