@@ -61,17 +61,14 @@ export class UserService {
           .map(this.utilityService.extractData)
           .catch(this.utilityService.handleError)
           .subscribe((response) => {
+            console.log(response);
         if (response['_body'] == 'Failure') {
           alert('Unable to Get User Details');
         } else {
-          console.log(response);
-          this.userDetails = JSON.parse(response['_body'])[0];
-          console.log(this.userDetails);
-          if (this.userDetails.hasOwnProperty('gender')) {
-            this.profileUpdated = true;
-          } else {
-            this.profileUpdated = false;
-          }
+          let res = JSON.parse(response['_body']);
+          console.log(res);
+          this.userDetails = res.details[0];
+          this.profileUpdated = res.profileUpdate;
           this.userLoaded.next(this.userDetails);
         }
       });

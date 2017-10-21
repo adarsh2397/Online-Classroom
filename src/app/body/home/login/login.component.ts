@@ -50,11 +50,13 @@ export class LoginComponent implements OnInit {
             this.userService.setUserType(response.Type);
             this.userService.setUserID(response.ID);
             this.userService.setUserDetails(response.ID, response.Type);
-            if (this.userService.profileUpdated == true) {
-              this.router.navigate(['workspace']);
-            } else {
-              this.router.navigate(['dashboard']);
-            }
+            this.userService.userLoaded.subscribe(() => {
+              if (this.userService.profileUpdated == true) {
+                this.router.navigate(['workspace']);
+              } else {
+                this.router.navigate(['dashboard']);
+              }
+            });
           }
         }
       });
