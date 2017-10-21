@@ -1,10 +1,11 @@
-<br>
-<md-form-field>
-    <input mdInput name="username" [(ngModel)]="username" placeholder="Username">
-</md-form-field>
-<br>
-<md-form-field>
-    <input mdInput type="password" name="password" [(ngModel)]="password" placeholder="Password">
-</md-form-field>
-<br><br>
-<button md-raised-button (click)="loginUser();">Login</button>
+<div style="text-align:center;padding: 10px;">
+    <md-form-field>
+        <input mdInput name="username" [(ngModel)]="username" placeholder="Username">
+    </md-form-field>
+    <br>
+    <md-form-field>
+        <input mdInput type="password" name="password" [(ngModel)]="password" placeholder="Password">
+    </md-form-field>
+    <br>
+    <button md-button class="btn-success" (click)="loginUser();">Login</button>
+</div>
