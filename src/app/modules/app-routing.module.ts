@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BodyComponent } from '../body/body.component';
 import { HomeComponent } from '../body/home/home.component';
 import { DashboardComponent } from '../body/dashboard/dashboard.component'
+import { WorkspaceComponent } from '../body/workspace/workspace.component';
 
 const routes:Routes = [
     {
@@ -17,6 +18,10 @@ const routes:Routes = [
             {
                 path: 'dashboard',
                 component: DashboardComponent,
+            },
+            {
+                path: 'workspace',
+                component: WorkspaceComponent
             },
             {
                 path: '',
