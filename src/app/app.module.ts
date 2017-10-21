@@ -20,6 +20,7 @@ import { LoginService } from './services/login.service';
 import { UtilityService } from './services/utility.service';
 import { UserService } from './services/user.service';
 import { EditProfileDialogComponent } from './body/dashboard/edit-profile-dialog/edit-profile-dialog.component';
+import { WorkspaceComponent } from './body/workspace/workspace.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { EditProfileDialogComponent } from './body/dashboard/edit-profile-dialog
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    EditProfileDialogComponent
+    EditProfileDialogComponent,
+    WorkspaceComponent
   ],
   imports: [
     BrowserModule,

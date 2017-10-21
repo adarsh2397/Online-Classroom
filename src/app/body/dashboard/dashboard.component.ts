@@ -61,6 +61,11 @@ export class DashboardComponent implements OnInit {
           type: this.userService.getUserType()
         }
         this.userService.getUserDetails(data);
+        this.userDetails.profileUpdated = true;
+      } else if (this.userService.profileUpdated == false) {
+        dialog = this.dialog.open(EditProfileDialogComponent, {
+          data: this.userDetails
+        });
       }
     });
   }
