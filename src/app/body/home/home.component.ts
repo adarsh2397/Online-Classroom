@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  private screenHeight: any;
+
   constructor() { }
 
   ngOnInit() {
+    this.screenHeight = screen.height*0.80 + 'px';
+    console.log(this.screenHeight);
   }
 
 }
