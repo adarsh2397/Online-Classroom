@@ -9,8 +9,6 @@ import { UserService } from '../services/user.service';
 })
 export class HeaderComponent implements OnInit {
 
-  private isLoggedOn = false;
-
   private name: string;
   private profilepic: string;
 
@@ -25,6 +23,11 @@ export class HeaderComponent implements OnInit {
         this.profilepic = userDetails.profilepic;
       }
     });
+  }
+
+  logout() {
+    this.userService.logout();
+    location.href = 'localhost:4200';
   }
 
 }

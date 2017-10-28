@@ -14,6 +14,7 @@ export class UserService {
 
   private userID: number;
   private userType: string;
+  
   public profileUpdated: boolean;
   public loggedIn = false;
 
@@ -24,7 +25,23 @@ export class UserService {
   constructor(
     private http: Http,
     private utilityService: UtilityService
-  ) { }
+  ) { 
+    this.checkLoggedIn();
+  }
+
+  checkLoggedIn() {
+    if (localStorage.getItem('user_id') && localStorage.getItem('user_type')) {
+      this.setUserDetails(parseInt(localStorage.getItem('user_id')),localStorage.getItem('user_type'));
+    }
+  }
+
+  logout() {
+    this.setUserID(null);
+    this.setUserType(null);
+    this.loggedIn = false;
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user_type');
+  }
 
   getUserType() {
     return this.userType;
@@ -48,6 +65,8 @@ export class UserService {
       id: id,
       type: type
     }
+    this.setUserID(data.id);
+    this.setUserType(data.type);
     this.getUserDetails(data);
   }
 
@@ -70,6 +89,9 @@ export class UserService {
           this.userDetails = res.details[0];
           this.profileUpdated = res.profileUpdate;
           this.userLoaded.next(this.userDetails);
+
+          localStorage.setItem('user_id', data.id);
+          localStorage.setItem('user_type', data.type);
         }
       });
     
@@ -78,6 +100,17 @@ export class UserService {
 
   saveProfile(data) {
     const specificUrl = this.serverUrl + 'user/update-user-details';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  createClassroom(data) {
+    const specificUrl = this.serverUrl + 'user/create-classroom';
 
     const headers = new Headers({'Content-Type' : 'application/json'});
     const options = new RequestOptions({headers: headers});

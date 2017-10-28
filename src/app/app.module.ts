@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppMaterialModule } from './modules/app-material.module';
 import { AppRoutingModule } from './modules/app-routing.module';
+import { MdNativeDateModule } from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,6 +22,7 @@ import { UtilityService } from './services/utility.service';
 import { UserService } from './services/user.service';
 import { EditProfileDialogComponent } from './body/dashboard/edit-profile-dialog/edit-profile-dialog.component';
 import { WorkspaceComponent } from './body/workspace/workspace.component';
+import { CreateClassroomComponent } from './body/create-classroom/create-classroom.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { WorkspaceComponent } from './body/workspace/workspace.component';
     RegisterComponent,
     DashboardComponent,
     EditProfileDialogComponent,
-    WorkspaceComponent
+    WorkspaceComponent,
+    CreateClassroomComponent
   ],
   imports: [
     BrowserModule,

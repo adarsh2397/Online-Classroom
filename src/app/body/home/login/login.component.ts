@@ -47,8 +47,6 @@ export class LoginComponent implements OnInit {
             this.snackbar.open('Login Success', '',{
               duration: 3000
             });
-            this.userService.setUserType(response.Type);
-            this.userService.setUserID(response.ID);
             this.userService.setUserDetails(response.ID, response.Type);
             this.userService.userLoaded.subscribe(() => {
               if (this.userService.profileUpdated == true) {
