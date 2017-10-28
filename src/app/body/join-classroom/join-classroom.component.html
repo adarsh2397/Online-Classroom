@@ -1,0 +1,24 @@
+<div class="container" style="margin-top:15px;">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-6 box-border">
+        <h2 style="text-align:center;">Search Classroom</h2>
+        <div class="row" style="text-align:left;">
+            <div class="col-sm-offset-2 col-sm-6">
+                <input class="form-control" name="searchText" [(ngModel)]="searchText" placeholder="Course Code">
+            </div>
+            <button md-button class="btn-info" (click)="searchClassroom()">Search</button>
+        </div>
+        <hr>
+        <div class="classroom-data" *ngIf="classroom">
+            <h3>{{classroom.course_code}} - {{classroom.course_name}}</h3>
+            <p><b>Taken By: </b>{{classroom.firstname}} {{classroom.lastname}}</p>
+            <p><b>{{classroom.start_date | date}}</b> till <b>{{classroom.end_date | date}}</b></p>
+            <p>
+                {{classroom.description}}
+            </p>
+            <div class="row" style="text-align:center;">
+                <button md-button class="btn-success" (click)="joinClassroom();">Join Classroom</button>
+            </div>
+        </div>
+    </div>
+</div>

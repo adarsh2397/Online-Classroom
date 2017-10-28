@@ -6,6 +6,7 @@ import { HomeComponent } from '../body/home/home.component';
 import { DashboardComponent } from '../body/dashboard/dashboard.component'
 import { WorkspaceComponent } from '../body/workspace/workspace.component';
 import { CreateClassroomComponent } from '../body/create-classroom/create-classroom.component';
+import { JoinClassroomComponent } from '../body/join-classroom/join-classroom.component';
 
 const routes:Routes = [
     {
@@ -27,6 +28,10 @@ const routes:Routes = [
             {
                 path: 'create-classroom',
                 component: CreateClassroomComponent
+            },
+            {
+                path: 'join-classroom',
+                component: JoinClassroomComponent
             },
             {
                 path: '',

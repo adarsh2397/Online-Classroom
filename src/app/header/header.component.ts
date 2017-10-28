@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Router } from '@angular/router';
+
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -13,7 +15,8 @@ export class HeaderComponent implements OnInit {
   private profilepic: string;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -30,4 +33,11 @@ export class HeaderComponent implements OnInit {
     location.href = 'localhost:4200';
   }
 
+  routeCreateClassroom() {
+    this.router.navigate(['create-classroom']);
+  }
+
+  routeJoinClassroom() {
+    this.router.navigate(['join-classroom']);
+  }
 }

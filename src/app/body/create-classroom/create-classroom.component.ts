@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MdDialog } from '@angular/material';
+
+import { MessageDialogComponent } from '../../message-dialog/message-dialog.component';
 
 import { UserService } from '../../services/user.service';
 
@@ -17,9 +20,12 @@ export class CreateClassroomComponent implements OnInit {
   private endDate: Date;
   private adminId = 0;
 
+  private todayDate = new Date();
+
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private dialog: MdDialog
   ) { }
 
   ngOnInit() {
@@ -40,9 +46,20 @@ export class CreateClassroomComponent implements OnInit {
 
     this.userService.createClassroom(data).subscribe((response) => {
       if (response['_body'] == 'Failure') {
-        alert('Failed');
+        let dialog = this.dialog.open(MessageDialogComponent,{
+          data: {
+            message: 'Unsuccessful. Please try again later.'
+          }
+        });
       } else {
-        alert('Success');
+        let dialog = this.dialog.open(MessageDialogComponent,{
+          data: {
+            message: 'Classroom Successfully Created'
+          }
+        });
+        dialog.afterClosed().subscribe(() => {
+          this.router.navigate(['home']);
+        });
       }
     });
   }

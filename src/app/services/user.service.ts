@@ -14,7 +14,7 @@ export class UserService {
 
   private userID: number;
   private userType: string;
-  
+
   public profileUpdated: boolean;
   public loggedIn = false;
 
@@ -111,6 +111,28 @@ export class UserService {
 
   createClassroom(data) {
     const specificUrl = this.serverUrl + 'user/create-classroom';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  searchClassroom(data) {
+    const specificUrl = this.serverUrl + 'user/search-course-code';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  joinClassroom(data) {
+    const specificUrl = this.serverUrl + 'user/join-classroom';
 
     const headers = new Headers({'Content-Type' : 'application/json'});
     const options = new RequestOptions({headers: headers});

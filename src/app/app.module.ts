@@ -23,6 +23,8 @@ import { UserService } from './services/user.service';
 import { EditProfileDialogComponent } from './body/dashboard/edit-profile-dialog/edit-profile-dialog.component';
 import { WorkspaceComponent } from './body/workspace/workspace.component';
 import { CreateClassroomComponent } from './body/create-classroom/create-classroom.component';
+import { MessageDialogComponent } from './message-dialog/message-dialog.component';
+import { JoinClassroomComponent } from './body/join-classroom/join-classroom.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { CreateClassroomComponent } from './body/create-classroom/create-classro
     DashboardComponent,
     EditProfileDialogComponent,
     WorkspaceComponent,
-    CreateClassroomComponent
+    CreateClassroomComponent,
+    MessageDialogComponent,
+    JoinClassroomComponent
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,8 @@ import { CreateClassroomComponent } from './body/create-classroom/create-classro
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    EditProfileDialogComponent
+    EditProfileDialogComponent,
+    MessageDialogComponent
   ]
 })
 export class AppModule { }
