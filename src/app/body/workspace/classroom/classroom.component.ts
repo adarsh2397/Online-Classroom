@@ -260,11 +260,11 @@ export class ClassroomComponent implements OnInit, OnChanges {
     this.getClassroomInfo();
   }
 
-  kickFromClassroom(type,s_id) {
+  kickFromClassroom(type,u_id) {
     const data = {
       type: type,
       c_id: this.classroom.id,
-      s_id: s_id
+      u_id: u_id
     }
 
     this.userService.leaveClassroom(data).subscribe((response) => {

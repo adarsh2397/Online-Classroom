@@ -47,4 +47,24 @@ export class WorkspaceComponent implements OnInit {
     this.selectedClassroom = this.classrooms[index];
   }
 
+  refreshClassrooms() {
+    this.getClassroomsList();
+  }
+
+  leaveClassroom() {
+    const data = {
+      type: this.userService.getUserType(),
+      c_id: this.selectedClassroom.id,
+      u_id: this.userService.getUserID()
+    }
+
+    this.userService.leaveClassroom(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else {
+        this.refreshClassrooms();
+      }
+    });
+  }
+
 }

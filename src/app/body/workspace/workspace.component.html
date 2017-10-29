@@ -1,9 +1,14 @@
 <div class="container">
     <div class="col-sm-3">
         <h3>Navigation</h3>
-        <ul *ngIf="classrooms">
+        <ul *ngIf="classrooms" style="list-style-type: none;">
             <li *ngFor="let classroom of classrooms;let i = index;">
                 <a role="button" (click)="selectClassroom(i);">{{classroom.course_code}} - {{classroom.course_name}}</a>
+                <ul *ngIf="selectedClassroom == classroom">
+                    <li>
+                        <a role="button" style="color:red" (click)="leaveClassroom();">Leave</a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
