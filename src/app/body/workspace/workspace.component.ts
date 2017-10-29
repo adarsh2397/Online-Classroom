@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MdDialog } from '@angular/material';
+
+import { ConfirmDialogComponent } from '../../confirm-dialog/confirm-dialog.component';
 
 import { UserService } from '../../services/user.service';
 
@@ -15,7 +18,8 @@ export class WorkspaceComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private dialog: MdDialog
   ) { }
 
   ngOnInit() {
@@ -48,21 +52,33 @@ export class WorkspaceComponent implements OnInit {
   }
 
   refreshClassrooms() {
+    this.selectedClassroom = null;
     this.getClassroomsList();
   }
 
   leaveClassroom() {
-    const data = {
-      type: this.userService.getUserType(),
-      c_id: this.selectedClassroom.id,
-      u_id: this.userService.getUserID()
-    }
 
-    this.userService.leaveClassroom(data).subscribe((response) => {
-      if (response['_body'] == 'Failure') {
-        alert('Server Failed');
-      } else {
-        this.refreshClassrooms();
+    let dialog = this.dialog.open(ConfirmDialogComponent,{
+      data: {
+        question: 'Are you sure you want to leave the classroom?'
+      }
+    });
+
+    dialog.afterClosed().subscribe((response) => {
+      if (response == 'Confirmed') {
+        const data = {
+          type: this.userService.getUserType(),
+          c_id: this.selectedClassroom.id,
+          u_id: this.userService.getUserID()
+        }
+
+        this.userService.leaveClassroom(data).subscribe((response) => {
+          if (response['_body'] == 'Failure') {
+            alert('Server Failed');
+          } else {
+            this.refreshClassrooms();
+          }
+        });
       }
     });
   }

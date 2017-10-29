@@ -26,6 +26,7 @@ import { CreateClassroomComponent } from './body/create-classroom/create-classro
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { JoinClassroomComponent } from './body/join-classroom/join-classroom.component';
 import { ClassroomComponent } from './body/workspace/classroom/classroom.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { ClassroomComponent } from './body/workspace/classroom/classroom.compone
     CreateClassroomComponent,
     MessageDialogComponent,
     JoinClassroomComponent,
-    ClassroomComponent
+    ClassroomComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +62,8 @@ import { ClassroomComponent } from './body/workspace/classroom/classroom.compone
   bootstrap: [AppComponent],
   entryComponents: [
     EditProfileDialogComponent,
-    MessageDialogComponent
+    MessageDialogComponent,
+    ConfirmDialogComponent
   ]
 })
 export class AppModule { }
