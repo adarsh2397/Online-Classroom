@@ -1,0 +1,8 @@
+<h2 md-dialog-title>Change Picture</h2>
+<md-dialog-content>
+    <input class="form-control" type="file" name="image" (change)="fileChangeEvent($event);">
+    <div class="row" style="text-align:center;">
+        <button md-button (click)="updatePicture();">Update</button>
+        <button md-button md-dialog-close>Close</button>
+    </div>
+</md-dialog-content>

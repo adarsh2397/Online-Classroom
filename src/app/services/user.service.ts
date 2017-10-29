@@ -278,4 +278,23 @@ export class UserService {
           .map(this.utilityService.extractData)
           .catch(this.utilityService.handleError);
   }
+
+  uploadImage(formData) {
+    const specificUrl = this.serverUrl + 'user/upload-image';
+
+    return this.http.post(specificUrl, formData)
+      .map(this.utilityService.extractData)
+      .catch(this.utilityService.handleError);
+  }
+
+  changeProfilePicture(data) {
+    const specificUrl = this.serverUrl + 'user/change-profile-pic';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
 }

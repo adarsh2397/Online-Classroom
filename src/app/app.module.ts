@@ -27,6 +27,7 @@ import { MessageDialogComponent } from './message-dialog/message-dialog.componen
 import { JoinClassroomComponent } from './body/join-classroom/join-classroom.component';
 import { ClassroomComponent } from './body/workspace/classroom/classroom.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ChangePictureDialogComponent } from './body/dashboard/change-picture-dialog/change-picture-dialog.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     MessageDialogComponent,
     JoinClassroomComponent,
     ClassroomComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ChangePictureDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +65,8 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
   entryComponents: [
     EditProfileDialogComponent,
     MessageDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    ChangePictureDialogComponent
   ]
 })
 export class AppModule { }

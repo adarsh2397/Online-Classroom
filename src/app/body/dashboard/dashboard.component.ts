@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { MdDialog } from '@angular/material';
 import { EditProfileDialogComponent } from './edit-profile-dialog/edit-profile-dialog.component';
+import { ChangePictureDialogComponent } from './change-picture-dialog/change-picture-dialog.component';
 
 import { UserService } from '../../services/user.service';
 
@@ -70,4 +71,35 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  changePicture() {
+    let dialog = this.dialog.open(ChangePictureDialogComponent);
+    dialog.afterClosed().subscribe((response) => {
+      if (response == 'Changed') {
+        const data = {
+          id: this.userService.getUserID(),
+          type: this.userService.getUserType()
+        }
+        this.userService.getUserDetails(data);
+      }
+    });
+  }
+
+  removePicture() {
+    const data = {
+      id: this.userService.getUserID(),
+      profilepic: 'http://localhost:3000/defaultpic.png'
+    }
+
+    this.userService.changeProfilePicture(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else if (response['_body'] == 'Success') {
+        const data = {
+          id: this.userService.getUserID(),
+          type: this.userService.getUserType()
+        }
+        this.userService.getUserDetails(data);
+      }
+    });
+  }
 }
