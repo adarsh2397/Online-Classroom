@@ -1,115 +1,117 @@
-<div class="container">
-    <h2 style="text-align: center;font-family: roboto-light;">
-        Profile <span (click)="openEditProfile()" style="cursor: pointer;">&#x2710;</span>
-    </h2>
-    <div class="card">
-        <div class="row" *ngIf="userDetails">
-            <div class="col-sm-5">
-                <img [src]="userDetails.profilepic" class="profilepic">
+<div class="wrapper" [style.height]="wrapperHeight">
+    <div class="container">
+        <h2 style="text-align: center;font-family: roboto-light;color:white;">
+            Profile <span (click)="openEditProfile()" style="cursor: pointer;">&#x2710;</span>
+        </h2>
+        <div class="card">
+            <div class="row" *ngIf="userDetails">
+                <div class="col-sm-5">
+                    <img [src]="userDetails.profilepic" class="profilepic">
+                </div>
+                <div class="col-sm-7" *ngIf="userDetails.type == 'Student'">
+                    Hello, <span class="profileheading">{{userDetails.firstname}}&nbsp;{{userDetails.lastname}}</span>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th><span class="fields">E-mail</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.email}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">Phone</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.phone_no}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">House</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.house}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">Pincode</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.pincode}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">City</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.city}} </span></td>
+                        </tr>
+
+                        <tr *ngIf="userService.profileUpdated">
+                            <th><span class="fields">Roll No</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.roll_no}} </span></td>
+                        </tr>
+
+                        <tr *ngIf="userService.profileUpdated">
+                            <th><span class="fields">Reg No</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.reg_no}} </span></td>
+                        </tr>
+
+                        <tr *ngIf="userService.profileUpdated">
+                            <th><span class="fields">Degree</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.degree}} </span></td>
+                        </tr>
+
+                    </table>
+                    <br>
+
+                </div>
+
+
+                <div class="col-sm-7" *ngIf="userDetails.type == 'Teacher'">
+                    Hello, <span class="profileheading">{{userDetails.firstname}}&nbsp;{{userDetails.lastname}}</span>
+                    <hr>
+                    <table>
+                        <tr>
+                            <th><span class="fields">E-mail:</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.email}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">Phone:</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.phone_no}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">House:</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.house}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">Pincode:</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.pincode}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">City:</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.city}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">Gender:</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.gender}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">Designation:</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.designation}} </span></td>
+                        </tr>
+
+                        <tr>
+                            <th><span class="fields">About:</span></th>
+                            <td><span class="fields" contenteditable="true"> {{userDetails.about}} </span></td>
+                        </tr>
+
+                    </table>
+                    <br>
+
+                </div>
             </div>
-            <div class="col-sm-7" *ngIf="userDetails.type == 'Student'">
-                Hello, <span class="profileheading">{{userDetails.firstname}}&nbsp;{{userDetails.lastname}}</span>
-                <hr>
-                <table>
-                    <tr>
-                        <th><span class="fields">E-mail</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.email}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">Phone</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.phone_no}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">House</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.house}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">Pincode</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.pincode}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">City</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.city}} </span></td>
-                    </tr>
-
-                    <tr *ngIf="userService.profileUpdated">
-                        <th><span class="fields">Roll No</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.roll_no}} </span></td>
-                    </tr>
-
-                    <tr *ngIf="userService.profileUpdated">
-                        <th><span class="fields">Reg No</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.reg_no}} </span></td>
-                    </tr>
-
-                    <tr *ngIf="userService.profileUpdated">
-                        <th><span class="fields">Degree</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.degree}} </span></td>
-                    </tr>
-
-                </table>
-                <br>
-
+            <div class="row" style="text-align:center;">
+                <button md-button class="btn-info" (click)="changePicture();">Change Picture</button>
+                <button md-button class="btn-danger" (click)="removePicture();">Remove Picture</button>
             </div>
 
-
-            <div class="col-sm-7" *ngIf="userDetails.type == 'Teacher'">
-                Hello, <span class="profileheading">{{userDetails.firstname}}&nbsp;{{userDetails.lastname}}</span>
-                <hr>
-                <table>
-                    <tr>
-                        <th><span class="fields">E-mail:</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.email}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">Phone:</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.phone_no}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">House:</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.house}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">Pincode:</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.pincode}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">City:</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.city}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">Gender:</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.gender}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">Designation:</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.designation}} </span></td>
-                    </tr>
-
-                    <tr>
-                        <th><span class="fields">About:</span></th>
-                        <td><span class="fields" contenteditable="true"> {{userDetails.about}} </span></td>
-                    </tr>
-
-                </table>
-                <br>
-
-            </div>
         </div>
-        <div class="row" style="text-align:center;">
-            <button md-button class="btn-info" (click)="changePicture();">Change Picture</button>
-            <button md-button class="btn-danger" (click)="removePicture();">Remove Picture</button>
-        </div>
-
     </div>
 </div>

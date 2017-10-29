@@ -115,7 +115,7 @@
                     <p>{{adminTeacher.email}}</p>
                 </div>
             </div>
-            <div name="faculty" *ngIf="teachers && teachers.length">
+            <div name="faculty" *ngIf="teachers && teachers.length && adminTeacher">
                 <h4>Faculty:</h4>
                 <ul style="list-style-type: none">
                     <li *ngFor="let teacher of teachers">

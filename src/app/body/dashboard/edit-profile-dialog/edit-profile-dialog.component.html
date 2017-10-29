@@ -50,8 +50,10 @@
         </md-select>
         <br>
         <br>
-
-        <button md-raised-button [disabled]="!editForm.valid" (click)="saveProfile()">Save</button>
+        <div class="row" style="text-align:center;">
+            <button md-button [disabled]="!editForm.valid" (click)="saveProfile()">Save</button>
+            <button md-button md-dialog-close *ngIf="userService.profileUpdated">Close</button>
+        </div>
         <br>
     </form>
 </div>

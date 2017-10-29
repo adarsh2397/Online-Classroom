@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MdDialog } from '@angular/material';
@@ -16,11 +16,14 @@ export class DashboardComponent implements OnInit {
 
   private userDetails: any;
 
+  private wrapperHeight = ($(window).height() - 50) + 'px';
+
   constructor(
     private userService: UserService,
     private dialog: MdDialog,
     private router: Router
   ) { 
+    console.log($(window).height());
     if (!this.userService.loggedIn) {
       this.router.navigate(['home']);
     }

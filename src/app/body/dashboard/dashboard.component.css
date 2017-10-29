@@ -1,8 +1,12 @@
 .card {
     padding: 15px;
-    border: 1px solid black;
     width: 800px;
     margin: 0 auto;
+    background: white;
+}
+
+.wrapper {
+    background: rgb(66, 158, 244);
 }
 
 .profilepic {
