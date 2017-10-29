@@ -1,8 +1,8 @@
-<div class="container">
-    <div class="col-sm-3">
-        <h3>Navigation</h3>
-        <ul *ngIf="classrooms" style="list-style-type: none;">
-            <li *ngFor="let classroom of classrooms;let i = index;">
+<div class="container-fluid">
+    <div class="col-sm-3 left-menu" [style.height]="windowheight">
+        <h3 style="color:white;">Navigation</h3>
+        <ul *ngIf="classrooms" style="list-style-type: none;padding-left:0px;">
+            <li *ngFor="let classroom of classrooms;let i = index;" class="left-menu-item">
                 <a role="button" (click)="selectClassroom(i);">{{classroom.course_code}} - {{classroom.course_name}}</a>
                 <ul *ngIf="selectedClassroom == classroom">
                     <li>
@@ -12,7 +12,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-9" [style.height]="windowheight" style="overflow-y:scroll;">
         <div *ngIf="!selectedClassroom">
             <h2>Welcome to DotClass</h2>
         </div>

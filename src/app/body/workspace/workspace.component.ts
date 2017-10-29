@@ -16,6 +16,8 @@ export class WorkspaceComponent implements OnInit {
   private classrooms: Array<any>;
   private selectedClassroom;
 
+  private windowheight = ($(window).height()-50) + 'px';
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -83,4 +85,18 @@ export class WorkspaceComponent implements OnInit {
     });
   }
 
+  onElementHeightChange(elm, callback){
+    var lastHeight = elm.clientHeight, newHeight;
+    (function run(){
+        newHeight = elm.clientHeight;
+        if( lastHeight != newHeight )
+            callback();
+        lastHeight = newHeight;
+
+        if( elm.onElementHeightChangeTimer )
+            clearTimeout(elm.onElementHeightChangeTimer);
+
+        elm.onElementHeightChangeTimer = setTimeout(run, 200);
+    })();
+  }
 }

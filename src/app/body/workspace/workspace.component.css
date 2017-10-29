@@ -2,3 +2,13 @@
     margin: 0;
     padding: 10px;
 }
+
+.left-menu {
+    background: rgb(66, 158, 244);
+}
+
+.left-menu-item {
+    background: white;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
