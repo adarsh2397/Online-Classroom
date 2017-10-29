@@ -4,9 +4,9 @@
             <a class="navbar-brand" href="#">Dot <i>Class</i></a>
         </div>
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li *ngIf="userService.loggedIn">
                 <button md-button class="btn-primary" (click)="routeCreateClassroom();" *ngIf="userService.getUserType() == 'Teacher'" style="margin-top: 7px;">Create Classroom</button>
-                <button md-button class="btn-primary" (click)="routeJoinClassroom();" *ngIf="userService.getUserType() == 'Student'" style="margin-top: 7px;">Join Classroom</button>
+                <button md-button class="btn-primary" (click)="routeJoinClassroom();" style="margin-top: 7px;">Join Classroom</button>
             </li>
             <li class="dropdown" *ngIf="name">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -14,7 +14,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a routerLink="/dashboard">Settings</a></li>
-                    <li><a role="button">Logout</a></li>
+                    <li><a role="button" (click)="logout();">Logout</a></li>
                 </ul>
             </li>
         </ul>

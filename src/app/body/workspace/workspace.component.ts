@@ -19,10 +19,14 @@ export class WorkspaceComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (this.userService.profileUpdated == false) {
-      this.router.navigate(['dashboard']);
+    if (this.userService.loggedIn == false) {
+      this.router.navigate(['home']);
+    } else {
+      if (this.userService.profileUpdated == false) {
+        this.router.navigate(['dashboard']);
+      }
+      this.getClassroomsList();
     }
-    this.getClassroomsList();
   }
 
   getClassroomsList() {

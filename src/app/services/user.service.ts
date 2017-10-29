@@ -132,8 +132,13 @@ export class UserService {
   }
 
   joinClassroom(data) {
-    const specificUrl = this.serverUrl + 'user/join-classroom';
-
+    let specificUrl = this.serverUrl + 'user/join-classroom';
+    if (this.getUserType() == 'Student') {
+      specificUrl = this.serverUrl + 'user/join-classroom';
+    } else if (this.getUserType() == 'Teacher') {
+      specificUrl = this.serverUrl + 'user/join-classroom-teacher';
+    }
+    
     const headers = new Headers({'Content-Type' : 'application/json'});
     const options = new RequestOptions({headers: headers});
 
@@ -254,6 +259,17 @@ export class UserService {
 
   deleteResource(data) {
     const specificUrl = this.serverUrl + 'user/delete-resource';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  leaveClassroom(data) {
+    const specificUrl = this.serverUrl + 'user/leave-classroom';
 
     const headers = new Headers({'Content-Type' : 'application/json'});
     const options = new RequestOptions({headers: headers});

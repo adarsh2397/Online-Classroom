@@ -58,6 +58,12 @@ export class JoinClassroomComponent implements OnInit {
         dialog.afterClosed().subscribe(() => {
           this.router.navigate(['workspace']);
         });
+      } else if (response['_body'] == 'Joined') {
+        this.dialog.open(MessageDialogComponent, {
+          data: {
+            message: 'You are already a part of this classroom'
+          }
+        });
       }
     })
   }

@@ -255,4 +255,24 @@ export class ClassroomComponent implements OnInit, OnChanges {
       }
     });
   }
+
+  refreshClassroomInfo() {
+    this.getClassroomInfo();
+  }
+
+  kickFromClassroom(type,s_id) {
+    const data = {
+      type: type,
+      c_id: this.classroom.id,
+      s_id: s_id
+    }
+
+    this.userService.leaveClassroom(data).subscribe((response) => {
+        if (response['_body'] == 'Failure') {
+          alert('Server Failed');
+        } else {
+          this.refreshClassroomInfo();
+        }
+    });
+  }
 }

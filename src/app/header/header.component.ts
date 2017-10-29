@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.userService.logout();
-    location.href = 'localhost:4200';
+    location.reload();
   }
 
   routeCreateClassroom() {
