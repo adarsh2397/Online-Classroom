@@ -12,7 +12,9 @@ import { UserService } from '../../services/user.service';
 export class JoinClassroomComponent implements OnInit {
 
   private searchText: string;
-  private classroom: any;
+  private classrooms: any;
+
+  private wrapperheight = ($(window).height()-50) + 'px';
 
   constructor(
     private router: Router,
@@ -32,18 +34,18 @@ export class JoinClassroomComponent implements OnInit {
       if (response['_body'] == 'Failure') {
         alert('Server Failed');
       } else if (response['_body'] != '') {
-        this.classroom = JSON.parse(response['_body'])[0];
-        console.log(this.classroom);
+        this.classrooms = JSON.parse(response['_body']);
+        //console.log(this.classrooms);
       } else {
-        this.classroom = "";
+        this.classrooms = [];
       }
     });
   }
 
-  joinClassroom() {
+  joinClassroom(classroom) {
     const data = {
       userId: this.userService.getUserID(),
-      classroomId: this.classroom.id
+      classroomId: classroom.id
     }
 
     this.userService.joinClassroom(data).subscribe((response) => {
@@ -52,7 +54,7 @@ export class JoinClassroomComponent implements OnInit {
       } else if (response['_body'] == 'Success') {
         let dialog = this.dialog.open(MessageDialogComponent, {
           data: {
-            message: 'Successfully Joined Classroom with Course Code: ' + this.classroom.course_code
+            message: 'Successfully Joined Classroom with Course Code: ' + classroom.course_code
           }
         });
         dialog.afterClosed().subscribe(() => {
