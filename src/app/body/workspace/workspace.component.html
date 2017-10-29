@@ -1,8 +1,13 @@
 <div class="container">
-    <div class="col-sm-4">
-        Side Navigation Bar
+    <div class="col-sm-3">
+        <h3>Navigation</h3>
+        <ul *ngIf="classrooms">
+            <li *ngFor="let classroom of classrooms;let i = index;">
+                <a role="button" (click)="selectClassroom(i);">{{classroom.course_code}} - {{classroom.course_name}}</a>
+            </li>
+        </ul>
     </div>
-    <div class="col-sm-8">
-        Main Workspace Area
+    <div class="col-sm-9">
+        <app-classroom *ngIf="selectedClassroom" [classroom]="selectedClassroom"></app-classroom>
     </div>
 </div>

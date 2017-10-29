@@ -1,0 +1,56 @@
+<h2>
+    {{classroom.course_code}} - {{classroom.course_name}}
+</h2>
+<div>
+    <md-tab-group style="width:100%;">
+        <md-tab label="Q and A">
+            Forum and Threads
+        </md-tab>
+        <md-tab label="Resources">
+            Resources
+        </md-tab>
+        <md-tab label="Info">
+            <br>
+            <div class="row" *ngIf="adminTeacher">
+                <div class="col-sm-offset-1 col-sm-3">
+                    <img [src]="adminTeacher.profilepic" style="width:100px;height:100px;border-radius: 100%;">
+                </div>
+                <div class="col-sm-7">
+                    <h4><b>{{adminTeacher.firstname}} - {{adminTeacher.lastname}}</b></h4>
+                    <p style="color:darkgray;">Lead Instructor</p>
+                    <p>{{adminTeacher.email}}</p>
+                </div>
+            </div>
+            <div name="faculty" *ngIf="teachers && teachers.length">
+                <h4>Faculty:</h4>
+                <ul style="list-style-type: none">
+                    <li *ngFor="let teacher of teachers">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <img [src]="adminTeacher.profilepic" style="width:75;height:75px;border-radius: 100%;">
+                            </div>
+                            <div class="col-sm-6">
+                                <h5>{{teacher.firstname}} {{teacher.lastname}}</h5>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div name="students" *ngIf="students">
+                <h4>Students:</h4>
+                <ul style="list-style-type: none">
+                    <li *ngFor="let student of students">
+                        <div class="row">
+                            <div class="col-sm-2">
+                                <img [src]="student.profilepic" style="width:75;height:75px;border-radius: 100%;">
+                            </div>
+                            <div class="col-sm-4">
+                                <h5>{{student.firstname}} {{student.lastname}}</h5>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </md-tab>
+    </md-tab-group>
+</div>

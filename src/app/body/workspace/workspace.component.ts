@@ -10,6 +10,9 @@ import { UserService } from '../../services/user.service';
 })
 export class WorkspaceComponent implements OnInit {
 
+  private classrooms: Array<any>;
+  private selectedClassroom;
+
   constructor(
     private userService: UserService,
     private router: Router
@@ -19,6 +22,25 @@ export class WorkspaceComponent implements OnInit {
     if (this.userService.profileUpdated == false) {
       this.router.navigate(['dashboard']);
     }
+    this.getClassroomsList();
+  }
+
+  getClassroomsList() {
+    const data = {
+      id: this.userService.getUserID(),
+      type: this.userService.getUserType()
+    }
+
+    this.userService.getClassrooms(data).subscribe((response) => {
+      if (response['_body'] != 'Failure') {
+        this.classrooms = JSON.parse(response['_body']);
+        console.log(this.classrooms);
+      }
+    });
+  }
+
+  selectClassroom(index) {
+    this.selectedClassroom = this.classrooms[index];
   }
 
 }

@@ -142,4 +142,59 @@ export class UserService {
           .catch(this.utilityService.handleError);
   }
 
+  getClassrooms(data) {
+    const specificUrl = this.serverUrl + 'user/get-classrooms';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  getPosts(data) {
+    const specificUrl = this.serverUrl + 'user/get-posts';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  getThreads(data) {
+    const specificUrl = this.serverUrl + 'user/get-threads';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  getResources(data) {
+    const specificUrl = this.serverUrl + 'user/get-resources';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  getClassroomInfo(data) {
+    const specificUrl = this.serverUrl + 'user/get-classroom-info';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
 }

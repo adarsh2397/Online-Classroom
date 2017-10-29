@@ -25,6 +25,7 @@ import { WorkspaceComponent } from './body/workspace/workspace.component';
 import { CreateClassroomComponent } from './body/create-classroom/create-classroom.component';
 import { MessageDialogComponent } from './message-dialog/message-dialog.component';
 import { JoinClassroomComponent } from './body/join-classroom/join-classroom.component';
+import { ClassroomComponent } from './body/workspace/classroom/classroom.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { JoinClassroomComponent } from './body/join-classroom/join-classroom.com
     WorkspaceComponent,
     CreateClassroomComponent,
     MessageDialogComponent,
-    JoinClassroomComponent
+    JoinClassroomComponent,
+    ClassroomComponent
   ],
   imports: [
     BrowserModule,
