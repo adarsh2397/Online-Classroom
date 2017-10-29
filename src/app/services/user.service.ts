@@ -197,4 +197,69 @@ export class UserService {
           .catch(this.utilityService.handleError);
   }
 
+  createPost(data) {
+    const specificUrl = this.serverUrl + 'user/create-post';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  createThread(data) {
+    const specificUrl = this.serverUrl + 'user/create-thread';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  deletePost(data) {
+    const specificUrl = this.serverUrl + 'user/delete-post';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  deleteThread(data) {
+    const specificUrl = this.serverUrl + 'user/delete-thread';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  addResource(data) {
+    const specificUrl = this.serverUrl + 'user/add-resource';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  deleteResource(data) {
+    const specificUrl = this.serverUrl + 'user/delete-resource';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
 }

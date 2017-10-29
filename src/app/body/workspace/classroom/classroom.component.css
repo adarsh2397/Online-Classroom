@@ -1,3 +1,31 @@
 .mat-tab-label {
     width: 33%;
 }
+
+.new-post-title {
+    font-weight: 600;
+}
+
+.new-post-box {
+    margin-top: 15px;
+}
+
+.post-box {
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.thread-div {
+    border-bottom: 1px solid darkgray;
+    width: 100%;
+}
+
+.new-resource-url {
+    margin-top: 15px;
+}
+
+.new-resource-name {
+    margin-top: 15px;
+}

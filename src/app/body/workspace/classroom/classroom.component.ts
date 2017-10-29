@@ -16,8 +16,16 @@ export class ClassroomComponent implements OnInit, OnChanges {
 
   private teachers: Array<any>;
   private students: Array<any>;
-
+  private usersMap: Map<any,any>;
   private adminTeacher: any;
+
+  private newPostTitle: string;
+  private newPostContent: string;
+
+  private newResourceName: string;
+  private newResourceUrl: string;
+
+  private threadReply: Array<string>;
 
   constructor(
     private userService: UserService
@@ -31,6 +39,13 @@ export class ClassroomComponent implements OnInit, OnChanges {
     this.getThreads();
     this.getResources();
     this.getClassroomInfo();
+    this.clearPost();
+    this.clearResource();
+  }
+
+  refreshPostsThreads() {
+    this.getPosts();
+    this.getThreads();
   }
 
 
@@ -43,6 +58,7 @@ export class ClassroomComponent implements OnInit, OnChanges {
         alert('Server Failed');
       } else {
         this.posts = JSON.parse(response['_body']);
+        this.threadReply = new Array<string>(this.posts.length);
         console.log(this.posts);
       }
     });
@@ -103,6 +119,15 @@ export class ClassroomComponent implements OnInit, OnChanges {
         this.students = response.students;
         console.log(this.teachers)
         console.log(this.students);
+
+        this.usersMap = new Map<any,any>();
+        for(let student of this.students) {
+          this.usersMap.set(student.id, student);
+        }
+        for(let teacher of this.teachers) {
+          this.usersMap.set(teacher.id, teacher);
+        }
+        console.log(this.usersMap);
         this.resolveAdmin();
       }
     });
@@ -117,5 +142,117 @@ export class ClassroomComponent implements OnInit, OnChanges {
       }
     }
     console.log(this.adminTeacher);
+  }
+
+  showHideReplies(id) {
+    $('#replies' + id).slideToggle('slow');
+  }
+
+  createPost() {
+    const data = {
+      title: this.newPostTitle,
+      content: this.newPostContent,
+      c_id: this.classroom.id,
+      u_id: this.userService.getUserID()
+    }
+
+    this.userService.createPost(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else if (response['_body'] == 'Success') {
+        this.clearPost();
+        this.refreshPostsThreads();
+      }
+    });
+  }
+
+  clearPost() {
+    this.newPostContent = '';
+    this.newPostTitle = '';
+  }
+
+  createThread(index,post_id) {
+    const data = {
+      p_id: post_id,
+      content: this.threadReply[index],
+      u_id: this.userService.getUserID()
+    }
+
+    this.userService.createThread(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else if (response['_body'] == 'Success') {
+        this.refreshPostsThreads();
+      }
+    });
+  }
+
+  deletePost(id) {
+    const data = {
+      id: id
+    }
+
+    this.userService.deletePost(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else if (response['_body'] == 'Success') {
+        this.refreshPostsThreads();
+      }
+    });
+  }
+
+  deleteThread(id) {
+    const data = {
+      id: id
+    }
+
+    this.userService.deleteThread(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else if (response['_body'] == 'Success') {
+        this.refreshPostsThreads();
+      }
+    });
+  }
+
+  clearResource() {
+    this.newResourceName = '';
+    this.newResourceUrl = '';
+  }
+  
+  refreshResources() {
+    this.getResources();
+  }
+
+  addResource() {
+    const data = {
+      name: this.newResourceName,
+      url: this.newResourceUrl,
+      u_id: this.userService.getUserID(),
+      c_id: this.classroom.id
+    }
+
+    this.userService.addResource(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else {
+        this.refreshResources();
+        this.clearResource();
+      }
+    });
+  }
+
+  deleteResource(id) {
+    const data = {
+      id: id
+    }
+
+    this.userService.deleteResource(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else {
+        this.refreshResources();
+      }
+    });
   }
 }
