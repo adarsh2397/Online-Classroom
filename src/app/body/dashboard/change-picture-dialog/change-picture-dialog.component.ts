@@ -31,7 +31,7 @@ export class ChangePictureDialogComponent {
     const formData = new FormData();
     const files:Array<File> = this.imageFile;
 
-    formData.append("uploads[]", files[0], this.userService.userDetails.username);
+    formData.append("uploads[]", files[0], this.userService.userDetails.username + '.' + files[0].name.split('.')[1]);
 
     this.userService.uploadImage(formData).subscribe((response) => {
       if (response['_body'] == 'Failure') {
