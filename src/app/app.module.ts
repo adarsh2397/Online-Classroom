@@ -28,6 +28,7 @@ import { JoinClassroomComponent } from './body/join-classroom/join-classroom.com
 import { ClassroomComponent } from './body/workspace/classroom/classroom.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ChangePictureDialogComponent } from './body/dashboard/change-picture-dialog/change-picture-dialog.component';
+import { ChangePasswordComponent } from './body/dashboard/change-password/change-password.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ChangePictureDialogComponent } from './body/dashboard/change-picture-di
     JoinClassroomComponent,
     ClassroomComponent,
     ConfirmDialogComponent,
-    ChangePictureDialogComponent
+    ChangePictureDialogComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +68,8 @@ import { ChangePictureDialogComponent } from './body/dashboard/change-picture-di
     EditProfileDialogComponent,
     MessageDialogComponent,
     ConfirmDialogComponent,
-    ChangePictureDialogComponent
+    ChangePictureDialogComponent,
+    ChangePasswordComponent
   ]
 })
 export class AppModule { }

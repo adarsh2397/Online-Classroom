@@ -22,6 +22,7 @@ body {
 .btn-primary,
 .btn-danger,
 .btn-info,
-.btn-success {
+.btn-success,
+.btn-warning {
     color: white !important;
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit, Inject, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MdDialog } from '@angular/material';
+import { MdDialog, MdSnackBar } from '@angular/material';
 import { EditProfileDialogComponent } from './edit-profile-dialog/edit-profile-dialog.component';
 import { ChangePictureDialogComponent } from './change-picture-dialog/change-picture-dialog.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 import { UserService } from '../../services/user.service';
 
@@ -21,7 +22,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private userService: UserService,
     private dialog: MdDialog,
-    private router: Router
+    private router: Router,
+    private snackbar: MdSnackBar
   ) { 
     console.log($(window).height());
     if (!this.userService.loggedIn) {
@@ -102,6 +104,17 @@ export class DashboardComponent implements OnInit {
           type: this.userService.getUserType()
         }
         this.userService.getUserDetails(data);
+      }
+    });
+  }
+
+  changePassword() {
+    let dialog = this.dialog.open(ChangePasswordComponent);
+    dialog.afterClosed().subscribe((response) => {
+      if (response == 'Success') {
+        this.snackbar.open('Successfully Changed','',{
+          duration: 3000
+        });
       }
     });
   }

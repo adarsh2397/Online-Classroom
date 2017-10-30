@@ -1,0 +1,12 @@
+.wrapper {
+    background: #c62828;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    margin-top: 30px;
+}

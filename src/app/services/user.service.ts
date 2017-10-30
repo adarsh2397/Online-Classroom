@@ -297,4 +297,15 @@ export class UserService {
           .map(this.utilityService.extractData)
           .catch(this.utilityService.handleError);
   }
+
+  changePassword(data) {
+    const specificUrl = this.serverUrl + 'user/change-password';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
 }
