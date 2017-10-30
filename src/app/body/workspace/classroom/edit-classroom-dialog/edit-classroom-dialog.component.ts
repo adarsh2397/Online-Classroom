@@ -32,14 +32,22 @@ export class EditClassroomDialogComponent {
   
 
   updateClassroom() {
+    let sd = new Date(this.startDate);
+    sd.setDate((sd.getDate()+1));
+    let ed = new Date(this.endDate);
+    ed.setDate((ed.getDate()+1));
+
+
     const data = {
       course_name: this.courseName,
       course_code: this.courseCode,
       description: this.description?this.description:'None',
-      start_date: this.startDate,
-      end_date: this.endDate,
+      start_date: sd.toISOString().slice(0,19).replace('T',' '),
+      end_date: ed.toISOString().slice(0,19).replace('T',' '),
       c_id: this.data.id
     }
+    console.log('DATA');
+    console.log(data);
 
     this.userService.updateClassroom(data).subscribe((response) => {
       if (response['_body'] == 'Failure') {

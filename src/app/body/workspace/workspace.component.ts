@@ -121,7 +121,6 @@ export class WorkspaceComponent implements OnInit {
         this.classrooms = JSON.parse(response['_body']);
         for(let classroom of this.classrooms) {
           if (classroom.id == parseInt(event)) {
-            alert(event);
             this.selectedClassroom = classroom;
             break;
           }

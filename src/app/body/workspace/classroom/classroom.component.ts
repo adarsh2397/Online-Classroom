@@ -376,7 +376,6 @@ export class ClassroomComponent implements OnInit, OnChanges {
     });
     dialog.afterClosed().subscribe((response) => {
       if (response == 'Changed') {
-        alert('changed');
         this.classroomChanged.emit(this.classroom.id);
       }
     });

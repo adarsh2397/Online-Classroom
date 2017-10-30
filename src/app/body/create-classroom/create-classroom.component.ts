@@ -35,13 +35,18 @@ export class CreateClassroomComponent implements OnInit {
   }
 
   createClassroomHelper() {
+    let sd = new Date(this.startDate);
+    sd.setDate((sd.getDate()+1));
+    let ed = new Date(this.endDate);
+    ed.setDate((ed.getDate()+1));
+
     const data = {
       courseName: this.courseName,
       courseCode: this.courseCode,
       description: this.description,
-      startDate: this.startDate,
+      startDate: sd.toISOString().slice(0,19).replace('T',' '),
       adminId: this.userService.getUserID(),
-      endDate: this.endDate
+      endDate: ed.toISOString().slice(0,19).replace('T',' ')
     }
 
     this.userService.createClassroom(data).subscribe((response) => {
