@@ -27,6 +27,17 @@ export class ClassroomComponent implements OnInit, OnChanges {
 
   private threadReply: Array<string>;
 
+  private editOn = false;
+  private editPostTitle: string;
+  private editPostContent: string;
+  private scrollPosition: number;
+  private editPostId: number;
+
+  private editThreadOn: Array<boolean>;
+  private editThreadReply: string;
+  private editThreadId: number;
+  private editThreadIndex: number;
+
   constructor(
     private userService: UserService
   ) { }
@@ -59,6 +70,7 @@ export class ClassroomComponent implements OnInit, OnChanges {
       } else {
         this.posts = JSON.parse(response['_body']);
         this.threadReply = new Array<string>(this.posts.length);
+        this.editThreadOn = new Array<boolean>(this.posts.length);
         console.log(this.posts);
       }
     });
@@ -178,13 +190,15 @@ export class ClassroomComponent implements OnInit, OnChanges {
       u_id: this.userService.getUserID()
     }
 
-    this.userService.createThread(data).subscribe((response) => {
-      if (response['_body'] == 'Failure') {
-        alert('Server Failed');
-      } else if (response['_body'] == 'Success') {
-        this.refreshPostsThreads();
-      }
-    });
+    if (data.content && data.content.length) {
+      this.userService.createThread(data).subscribe((response) => {
+        if (response['_body'] == 'Failure') {
+          alert('Server Failed');
+        } else if (response['_body'] == 'Success') {
+          this.refreshPostsThreads();
+        }
+      });
+    }
   }
 
   deletePost(id) {
@@ -274,5 +288,77 @@ export class ClassroomComponent implements OnInit, OnChanges {
           this.refreshClassroomInfo();
         }
     });
+  }
+
+  editPost(post) {
+    this.editOn = true;
+    this.scrollPosition = $('#classroom-window').scrollTop();
+    $('#classroom-window').animate({
+            scrollTop: 0
+        }, 300);
+    this.editPostTitle = post.title;
+    this.editPostContent = post.content;
+    this.editPostId = post.id;
+  }
+
+  updatePost() {
+    const data = {
+      title: this.editPostTitle,
+      content: this.editPostContent,
+      id: this.editPostId
+    }
+    this.userService.updatePost(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else if (response['_body'] == 'Success') {
+        this.cancelEdit();
+        this.refreshPostsThreads();
+        let dict = {
+          scrollTop: this.scrollPosition
+        }
+        console.log(dict);
+        $('#classroom-window').animate(dict, 300);
+      }
+    });
+  }
+
+  cancelEdit() {
+    this.editOn = false;
+    this.editPostTitle = '';
+    this.editPostContent = '';
+    this.editPostId = null;
+  }
+
+  editThread(thread, i) {
+    if (this.editThreadIndex != null) {
+      this.editThreadOn[this.editThreadIndex] = false;
+    }
+    this.editThreadOn[i] = true;
+    this.editThreadReply = thread.content;
+    this.editThreadId = thread.id;
+    this.editThreadIndex = i;
+  }
+
+  updateThread() {
+    const data = {
+      content: this.editThreadReply,
+      id: this.editThreadId
+    }
+
+    this.userService.updateThread(data).subscribe((response) => {
+      if (response['_body'] == 'Failure') {
+        alert('Server Failed');
+      } else if (response['_body'] == 'Success') {
+        this.cancelEditThread();
+        this.refreshPostsThreads();
+      }
+    });
+  }
+
+  cancelEditThread() {
+    this.editThreadOn[this.editThreadIndex] = false;
+    this.editThreadReply = '';
+    this.editThreadId = null;
+    this.editThreadIndex = null;
   }
 }

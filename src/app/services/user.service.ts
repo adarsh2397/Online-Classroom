@@ -308,4 +308,26 @@ export class UserService {
           .map(this.utilityService.extractData)
           .catch(this.utilityService.handleError);
   }
+
+  updatePost(data) {
+    const specificUrl = this.serverUrl + 'user/update-post';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
+
+  updateThread(data) {
+    const specificUrl = this.serverUrl + 'user/update-thread';
+
+    const headers = new Headers({'Content-Type' : 'application/json'});
+    const options = new RequestOptions({headers: headers});
+
+    return this.http.post(specificUrl, data, options)
+          .map(this.utilityService.extractData)
+          .catch(this.utilityService.handleError);
+  }
 }
