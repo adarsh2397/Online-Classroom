@@ -51,7 +51,7 @@ export class CreateClassroomComponent implements OnInit {
             message: 'Unsuccessful. Please try again later.'
           }
         });
-      } else {
+      } else if (response['_body'] == 'Success') {
         let dialog = this.dialog.open(MessageDialogComponent,{
           data: {
             message: 'Classroom Successfully Created'
@@ -60,6 +60,13 @@ export class CreateClassroomComponent implements OnInit {
         dialog.afterClosed().subscribe(() => {
           this.router.navigate(['home']);
         });
+      } else if (response['_body'] == 'Duplicate') {
+        this.courseCode = '';
+        let dialog = this.dialog.open(MessageDialogComponent, {
+          data: {
+            message: 'Course Code Already Exists'
+          }
+        })
       }
     });
   }

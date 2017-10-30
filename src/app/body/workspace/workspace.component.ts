@@ -60,29 +60,56 @@ export class WorkspaceComponent implements OnInit {
 
   leaveClassroom() {
 
-    let dialog = this.dialog.open(ConfirmDialogComponent,{
-      data: {
-        question: 'Are you sure you want to leave the classroom?'
-      }
-    });
-
-    dialog.afterClosed().subscribe((response) => {
-      if (response == 'Confirmed') {
-        const data = {
-          type: this.userService.getUserType(),
-          c_id: this.selectedClassroom.id,
-          u_id: this.userService.getUserID()
+    if (this.userService.getUserID() != this.selectedClassroom.admin_id) {
+      let dialog = this.dialog.open(ConfirmDialogComponent,{
+        data: {
+          question: 'Are you sure you want to leave the classroom?'
         }
+      });
 
-        this.userService.leaveClassroom(data).subscribe((response) => {
-          if (response['_body'] == 'Failure') {
-            alert('Server Failed');
-          } else {
-            this.refreshClassrooms();
+      dialog.afterClosed().subscribe((response) => {
+        if (response == 'Confirmed') {
+          const data = {
+            type: this.userService.getUserType(),
+            c_id: this.selectedClassroom.id,
+            u_id: this.userService.getUserID()
           }
-        });
-      }
-    });
+
+          this.userService.leaveClassroom(data).subscribe((response) => {
+            if (response['_body'] == 'Failure') {
+              alert('Server Failed');
+            } else {
+              this.refreshClassrooms();
+            }
+          });
+        }
+      });
+    } else {
+      // Admin is leaving the classroom
+      let dialog = this.dialog.open(ConfirmDialogComponent,{
+        data: {
+          question: 'The Classroom may be deleted if no other teacher is a member of this classroom. Are you sure you want to continue?'
+        }
+      });
+
+      dialog.afterClosed().subscribe((response) => {
+        if (response == 'Confirmed') {
+          const data = {
+            type: this.userService.getUserType(),
+            c_id: this.selectedClassroom.id,
+            t_id: this.userService.getUserID()
+          }
+
+          this.userService.adminLeaveClassroom(data).subscribe((response) => {
+            if (response['_body'] == 'Failure') {
+              alert('Server Failed');
+            } else if (response['_body'] == 'Success') {
+              this.refreshClassrooms();
+            }
+          });
+        }
+      });
+    }
   }
 
   onElementHeightChange(elm, callback){

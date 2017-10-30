@@ -161,7 +161,7 @@
                     </li>
                 </ul>
             </div>
-            <div name="students" *ngIf="students && adminTeacher">
+            <div name="students" *ngIf="students && students.length && adminTeacher">
                 <h4>Students:</h4>
                 <ul style="list-style-type: none">
                     <li *ngFor="let student of students">
