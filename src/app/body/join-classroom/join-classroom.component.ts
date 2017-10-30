@@ -14,6 +14,8 @@ export class JoinClassroomComponent implements OnInit {
   private searchText: string;
   private classrooms: any;
 
+  private clicked = false;
+
   private wrapperheight = ($(window).height()-50) + 'px';
 
   constructor(
@@ -26,20 +28,23 @@ export class JoinClassroomComponent implements OnInit {
   }
 
   searchClassroom() {
-    const data = {
-      courseCode: this.searchText
-    }
-
-    this.userService.searchClassroom(data).subscribe((response) => {
-      if (response['_body'] == 'Failure') {
-        alert('Server Failed');
-      } else if (response['_body'] != '') {
-        this.classrooms = JSON.parse(response['_body']);
-        //console.log(this.classrooms);
-      } else {
-        this.classrooms = [];
+    this.classrooms = [];
+    if (this.searchText != '') {
+      const data = {
+        courseCode: this.searchText
       }
-    });
+      this.clicked = true;
+      this.userService.searchClassroom(data).subscribe((response) => {
+        if (response['_body'] == 'Failure') {
+          alert('Server Failed');
+        } else if (response['_body'] != '') {
+          this.classrooms = JSON.parse(response['_body']);
+          //console.log(this.classrooms);
+        } else {
+          this.classrooms = [];
+        }
+      });
+    }
   }
 
   joinClassroom(classroom) {

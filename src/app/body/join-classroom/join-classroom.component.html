@@ -10,6 +10,9 @@
             <button md-button class="btn-info" (click)="searchClassroom()">Search</button>
         </div>
         <hr>
+        <div class="row" style="text-align:center;" *ngIf="clicked && classrooms.length==0">
+            <h3>No classrooms found</h3>
+        </div>
         <div *ngIf="classrooms">
             <div class="classroom-data" *ngFor="let classroom of classrooms">
                 <h3>{{classroom.course_code}} - {{classroom.course_name}}</h3>
