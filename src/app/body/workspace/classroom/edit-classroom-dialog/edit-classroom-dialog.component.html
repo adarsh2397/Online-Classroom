@@ -1,0 +1,26 @@
+<h2 md-dialog-title style="text-align:center;">Create Classroom</h2>
+<form #createClassroom="ngForm" *ngIf="data">
+    <md-form-field style="width:100%;">
+        <input mdInput placeholder="Course Name" [(ngModel)]="courseName" name="coursename" required>
+    </md-form-field>
+    <md-form-field style="width:100%;">
+        <input mdInput placeholder="Course Code" [(ngModel)]="courseCode" name="coursecode" maxlength="8" required>
+    </md-form-field>
+    <md-form-field style="width:100%;min-height: 50px;">
+        <textarea mdInput placeholder="Description (Optional)" [(ngModel)]="description" name="description"></textarea>
+    </md-form-field>
+    <md-form-field style="width:100%;">
+        <input mdInput [mdDatepicker]="picker" [min]="todayDate" placeholder="Start Date" [(ngModel)]="startDate" name="startdate" required>
+        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+        <md-datepicker #picker></md-datepicker>
+    </md-form-field>
+    <md-form-field style="width:100%;">
+        <input mdInput [mdDatepicker]="endpicker" [min]="startDate" placeholder="End Date" [(ngModel)]="endDate" name="enddate" required>
+        <md-datepicker-toggle mdSuffix [for]="endpicker"></md-datepicker-toggle>
+        <md-datepicker #endpicker></md-datepicker>
+    </md-form-field>
+    <div class="row" style="text-align:center">
+        <button md-button (click)="updateClassroom()" [disabled]="!createClassroom.form.valid">Update</button>
+        <button md-button md-dialog-close>Cancel</button>
+    </div>
+</form>

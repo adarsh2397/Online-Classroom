@@ -1,6 +1,9 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { MdDialog } from '@angular/material';
 
 import { UserService } from '../../../services/user.service';
+
+import { EditClassroomDialogComponent } from './edit-classroom-dialog/edit-classroom-dialog.component';
 
 @Component({
   selector: 'app-classroom',
@@ -9,6 +12,9 @@ import { UserService } from '../../../services/user.service';
 })
 export class ClassroomComponent implements OnInit, OnChanges {
   @Input() classroom;
+  @Output() classroomChanged: EventEmitter<any> = new EventEmitter();
+
+  private today = new Date();
 
   private posts: Array<any>;
   private threads: Map<any,any>;
@@ -39,7 +45,8 @@ export class ClassroomComponent implements OnInit, OnChanges {
   private editThreadIndex: number;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private dialog: MdDialog
   ) { }
 
   ngOnInit() {
@@ -360,5 +367,18 @@ export class ClassroomComponent implements OnInit, OnChanges {
     this.editThreadReply = '';
     this.editThreadId = null;
     this.editThreadIndex = null;
+  }
+
+
+  editClassroom() {
+    let dialog = this.dialog.open(EditClassroomDialogComponent, {
+      data: this.classroom
+    });
+    dialog.afterClosed().subscribe((response) => {
+      if (response == 'Changed') {
+        alert('changed');
+        this.classroomChanged.emit(this.classroom.id);
+      }
+    });
   }
 }

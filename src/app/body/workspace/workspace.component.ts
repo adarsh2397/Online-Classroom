@@ -44,7 +44,6 @@ export class WorkspaceComponent implements OnInit {
     this.userService.getClassrooms(data).subscribe((response) => {
       if (response['_body'] != 'Failure') {
         this.classrooms = JSON.parse(response['_body']);
-        console.log(this.classrooms);
       }
     });
   }
@@ -110,6 +109,25 @@ export class WorkspaceComponent implements OnInit {
         }
       });
     }
+  }
+
+  classroomUpdate(event) {
+    const data = {
+      id: this.userService.getUserID(),
+      type: this.userService.getUserType()
+    }
+    this.userService.getClassrooms(data).subscribe((response) => {
+      if (response['_body'] != 'Failure') {
+        this.classrooms = JSON.parse(response['_body']);
+        for(let classroom of this.classrooms) {
+          if (classroom.id == parseInt(event)) {
+            alert(event);
+            this.selectedClassroom = classroom;
+            break;
+          }
+        }
+      }
+    });
   }
 
   onElementHeightChange(elm, callback){

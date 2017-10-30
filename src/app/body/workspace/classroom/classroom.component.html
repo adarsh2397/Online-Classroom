@@ -1,5 +1,10 @@
 <h2>
     {{classroom.course_code}} - {{classroom.course_name}}
+    <span *ngIf="adminTeacher && adminTeacher.id == userService.getUserID()">
+        <a role="button" (click)="editClassroom()">
+            <i class="fa fa-pencil"></i>
+        </a>
+    </span>
 </h2>
 <div>
     <md-tab-group>
@@ -137,13 +142,42 @@
                     <p>{{adminTeacher.email}}</p>
                 </div>
             </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <b>Description</b>
+                </div>
+                <div class="col-sm-9">
+                    {{classroom.description}}
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <b>Start</b>
+                </div>
+                <div class="col-sm-9">
+                    {{classroom.start_date | date}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-2">
+                    <b>End</b>
+                </div>
+                <div class="col-sm-9">
+                    {{classroom.end_date | date}}
+                </div>
+            </div>
             <div name="faculty" *ngIf="teachers && teachers.length && adminTeacher">
                 <h4>Faculty:</h4>
                 <ul style="list-style-type: none">
                     <li *ngFor="let teacher of teachers">
                         <div class="row">
                             <div class="col-sm-2">
-                                <img [src]="teacher.profilepic" style="width:75;height:75px;border-radius: 100%;">
+                                <img [src]="teacher.profilepic" style="width:75px;height:75px;border-radius: 100%;">
                             </div>
                             <div class="col-sm-10">
                                 <table style="width:100%;">

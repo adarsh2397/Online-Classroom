@@ -16,6 +16,6 @@
         <div *ngIf="!selectedClassroom">
             <h2>Welcome to DotClass</h2>
         </div>
-        <app-classroom *ngIf="selectedClassroom" [classroom]="selectedClassroom"></app-classroom>
+        <app-classroom *ngIf="selectedClassroom" (classroomChanged)="classroomUpdate($event);" [classroom]="selectedClassroom"></app-classroom>
     </div>
 </div>
