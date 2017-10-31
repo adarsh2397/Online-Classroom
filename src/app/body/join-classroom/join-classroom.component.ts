@@ -22,7 +22,11 @@ export class JoinClassroomComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private dialog: MdDialog
-  ) { }
+  ) { 
+    if (this.userService.loggedIn == false) {
+      this.router.navigate(['home']);
+    }
+  }
 
   ngOnInit() {
   }
