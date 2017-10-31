@@ -12,8 +12,8 @@ import { UserService } from '../../../services/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  private username: string = 'adarsh2397';
-  private password: string = 'adarsh2397';
+  private username: string = '';
+  private password: string = '';
 
   private loggingIn = false;
 
