@@ -1,21 +1,37 @@
-<div class="container-fluid">
+<div class="container-fluid" style="padding:0px;">
     <div class="col-sm-3 left-menu" [style.height]="windowheight">
         <h3 style="color:white;">Navigation</h3>
+        <div *ngIf="classrooms && !classrooms.length">
+            No classrooms
+        </div>
         <ul *ngIf="classrooms" style="list-style-type: none;padding-left:0px;">
             <li *ngFor="let classroom of classrooms;let i = index;" class="left-menu-item">
                 <a role="button" (click)="selectClassroom(i);">{{classroom.course_code}} - {{classroom.course_name}}</a>
-                <ul *ngIf="selectedClassroom == classroom">
-                    <li>
-                        <a role="button" style="color:red" (click)="leaveClassroom();">Leave</a>
-                    </li>
-                </ul>
+                <div class="row" *ngIf="selectedClassroom == classroom" style="text-align:center;">
+                    <button md-button class="btn-danger" (click)="leaveClassroom();">Leave</button>
+                    <button md-button class="btn-success" (click)="closeClassroom();">Close</button>
+                </div>
             </li>
         </ul>
     </div>
     <div class="col-sm-9" id="classroom-window" [style.height]="windowheight" style="overflow-y:scroll;">
         <div *ngIf="!selectedClassroom">
             <h2>Welcome to DotClass</h2>
+            <i>
+                Where Technology Meets Learning
+            </i>
+            <blockquote>
+                <h3>
+                    <i class="fa fa-quote-left"></i> When it comes to the design of effective learning experiences, one provocative question is worth a hundred proclamations.
+                    <i class="fa fa-quote-right"></i>
+                </h3>
+                <footer>Bernard Bull</footer>
+            </blockquote>
+            <p>
+                Join a class or select a class to continue
+            </p>
         </div>
         <app-classroom *ngIf="selectedClassroom" (classroomChanged)="classroomUpdate($event);" [classroom]="selectedClassroom"></app-classroom>
+        <div style="height:50px;"></div>
     </div>
 </div>

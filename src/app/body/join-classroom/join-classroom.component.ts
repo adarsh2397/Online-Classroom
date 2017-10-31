@@ -16,7 +16,7 @@ export class JoinClassroomComponent implements OnInit {
 
   private clicked = false;
 
-  private wrapperheight = ($(window).height()-50) + 'px';
+  private wrapperheight = ($(document).height()-50) + 'px';
 
   constructor(
     private router: Router,
