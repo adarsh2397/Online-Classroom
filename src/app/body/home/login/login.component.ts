@@ -15,6 +15,8 @@ export class LoginComponent implements OnInit {
   private username: string = 'adarsh2397';
   private password: string = 'adarsh2397';
 
+  private loggingIn = false;
+
   constructor(
     private loginService: LoginService,
     private userService: UserService,
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
       username: this.username,
       password: this.password
     }
+    this.loggingIn = true;
     this.loginService.loginUser(data)
       .subscribe((response) => {
         if (response['_body'] == 'Invalid') {
@@ -49,7 +52,8 @@ export class LoginComponent implements OnInit {
             });
             this.userService.setUserDetails(response.ID, response.Type);
             this.userService.userLoaded.subscribe(() => {
-              if (this.userService.profileUpdated == true) {
+              if (this.userService.profileUpdated == true && this.loggingIn) {
+                this.loggingIn = false;
                 this.router.navigate(['workspace']);
               } else {
                 this.router.navigate(['dashboard']);

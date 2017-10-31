@@ -28,9 +28,6 @@ export class WorkspaceComponent implements OnInit {
     if (this.userService.loggedIn == false) {
       this.router.navigate(['home']);
     } else {
-      if (this.userService.profileUpdated == false) {
-        this.router.navigate(['dashboard']);
-      }
       this.getClassroomsList();
     }
   }

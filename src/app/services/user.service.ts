@@ -39,6 +39,8 @@ export class UserService {
     this.setUserID(null);
     this.setUserType(null);
     this.loggedIn = false;
+    this.profileUpdated = false;
+    this.userDetails = null;
     localStorage.removeItem('user_id');
     localStorage.removeItem('user_type');
   }
@@ -88,10 +90,9 @@ export class UserService {
           console.log(res);
           this.userDetails = res.details[0];
           this.profileUpdated = res.profileUpdate;
-          this.userLoaded.next(this.userDetails);
-
           localStorage.setItem('user_id', data.id);
           localStorage.setItem('user_type', data.type);
+          this.userLoaded.next(this.userDetails);
         }
       });
     

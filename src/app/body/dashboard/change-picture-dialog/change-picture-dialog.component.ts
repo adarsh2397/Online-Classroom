@@ -25,7 +25,7 @@ export class ChangePictureDialogComponent {
   }
 
   updatePicture() {
-    if (this.imageFile.length == 0) {
+    if (this.imageFile && this.imageFile.length == 0) {
       alert('Image Not Selected');
     }
     const formData = new FormData();

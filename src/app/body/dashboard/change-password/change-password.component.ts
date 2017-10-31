@@ -10,9 +10,9 @@ import { UserService } from '../../../services/user.service';
 })
 export class ChangePasswordComponent {
 
-  private currentPassword: string = 'rahul23';
-  private newPassword: string = 'rahul';
-  private confirmPassword: string = 'rahul';
+  private currentPassword = '';
+  private newPassword = '';
+  private confirmPassword = '';
 
   private error: string;
 

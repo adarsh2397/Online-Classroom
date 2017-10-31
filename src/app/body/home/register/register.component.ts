@@ -54,13 +54,22 @@ export class RegisterComponent implements OnInit {
           this.snackbar.open('Registration Failed','',{
             duration: 3000
           });
-        } else {
-          let snackbar = this.snackbar.open('Register Success', '', {
+        } else if (response['_body'] == 'Duplicate') {
+          let snackbar = this.snackbar.open('Username or Email ID Already Used','',{
             duration: 3000
           });
-          snackbar.afterDismissed().subscribe(() => {
-            this.loginUser();
-          });
+          this.username = '';
+          this.email = '';
+          this.password = '';
+        } else if (response['_body']) {
+            if (response['_body'].indexOf('Success') == 0) {
+            let snackbar = this.snackbar.open('Register Success', '', {
+              duration: 3000
+            });
+            snackbar.afterDismissed().subscribe(() => {
+              this.loginUser();
+            });
+          }
         }
       });
   }
@@ -73,7 +82,7 @@ export class RegisterComponent implements OnInit {
     this.loginService.loginUser(data)
       .subscribe((response) => {
         if (response['_body'] == 'Invalid') {
-          this.snackbar.open('Invalid Username and Password', '',{
+          this.snackbar.open('Invalid Username or Password', '',{
             duration: 3000
           });
         } else if (response['_body'] == 'Failure') {

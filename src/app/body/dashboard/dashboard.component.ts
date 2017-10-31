@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     private snackbar: MdSnackBar
   ) { 
     console.log($(window).height());
-    if (!this.userService.loggedIn) {
+    if (!localStorage.getItem('user_id')) {
       this.router.navigate(['home']);
     }
   }
@@ -54,26 +54,38 @@ export class DashboardComponent implements OnInit {
   }
 
   openEditProfile() {
-    console.log('Hey');
-    console.log( this.userDetails);
-    let dialog = this.dialog.open(EditProfileDialogComponent, {
-      data: this.userDetails
-    });
+    if (this.userService.profileUpdated == false) {
+      let dialog = this.dialog.open(EditProfileDialogComponent, {
+        data: this.userDetails
+      });
 
-    dialog.afterClosed().subscribe((status) => {
-      if (status == 'Updated') {
-        const data = {
-          id: this.userService.getUserID(),
-          type: this.userService.getUserType()
+      dialog.afterClosed().subscribe((status) => {
+        if (status == 'Updated') {
+          const data = {
+            id: this.userService.getUserID(),
+            type: this.userService.getUserType()
+          }
+          this.userService.getUserDetails(data);
+          this.userDetails.profileUpdated = true;
+        } else if (this.userService.profileUpdated == false) {
+          this.openEditProfile();
         }
-        this.userService.getUserDetails(data);
-        this.userDetails.profileUpdated = true;
-      } else if (this.userService.profileUpdated == false) {
-        dialog = this.dialog.open(EditProfileDialogComponent, {
-          data: this.userDetails
-        });
-      }
-    });
+      });
+    } else {
+      let dialog = this.dialog.open(EditProfileDialogComponent, {
+        data: this.userDetails
+      });
+      dialog.afterClosed().subscribe((status) => {
+        if (status == 'Updated') {
+          const data = {
+            id: this.userService.getUserID(),
+            type: this.userService.getUserType()
+          }
+          this.userService.getUserDetails(data);
+          this.userDetails.profileUpdated = true;
+        }
+      });
+    }
   }
 
   changePicture() {
