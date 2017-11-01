@@ -15,7 +15,7 @@ export class CreateClassroomComponent implements OnInit {
 
   private courseName: string;
   private courseCode: string;
-  private description: string;
+  private description: string = '';
   private startDate: Date;
   private endDate: Date;
   private adminId = 0;
@@ -43,7 +43,7 @@ export class CreateClassroomComponent implements OnInit {
     const data = {
       courseName: this.courseName,
       courseCode: this.courseCode,
-      description: this.description,
+      description: this.description.length?this.description:'None',
       startDate: sd.toISOString().slice(0,19).replace('T',' '),
       adminId: this.userService.getUserID(),
       endDate: ed.toISOString().slice(0,19).replace('T',' ')
