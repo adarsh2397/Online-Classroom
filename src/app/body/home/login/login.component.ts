@@ -55,8 +55,12 @@ export class LoginComponent implements OnInit {
               if (this.userService.profileUpdated == true && this.loggingIn) {
                 this.loggingIn = false;
                 this.router.navigate(['workspace']);
-              } else {
+              } else if (this.userService.profileUpdated == false) {
+                this.loggingIn = false;
                 this.router.navigate(['dashboard']);
+              } else if (this.loggingIn == true) {
+                this.loggingIn = false;
+                this.router.navigate(['workspace']);
               }
             });
           }
